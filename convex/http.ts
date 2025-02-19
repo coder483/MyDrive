@@ -26,18 +26,14 @@ http.route({
         case "user.created":
           await ctx.runMutation(internal.users.createUser, {
             tokenIdentifier: `https://${process.env.CLERK_HOSTNAME}|${result.data.id}`,
-            name: `${result.data.first_name ?? ""} ${
-              result.data.last_name ?? ""
-            }`,
+            name: `${result.data.first_name ?? ""} ${result.data.last_name ?? ""}`,
             image: result.data.image_url,
           });
           break;
         case "user.updated":
           await ctx.runMutation(internal.users.updateUser, {
             tokenIdentifier: `https://${process.env.CLERK_HOSTNAME}|${result.data.id}`,
-            name: `${result.data.first_name ?? ""} ${
-              result.data.last_name ?? ""
-            }`,
+            name: `${result.data.first_name ?? ""} ${result.data.last_name ?? ""}`,
             image: result.data.image_url,
           });
           break;
@@ -49,7 +45,6 @@ http.route({
           });
           break;
         case "organizationMembership.updated":
-          console.log(result.data.role);
           await ctx.runMutation(internal.users.updateRoleInOrgForUser, {
             tokenIdentifier: `https://${process.env.CLERK_HOSTNAME}|${result.data.public_user_data.user_id}`,
             orgId: result.data.organization.id,
@@ -62,6 +57,7 @@ http.route({
         status: 200,
       });
     } catch (err) {
+      console.error("Webhook Error:", err);
       return new Response("Webhook Error", {
         status: 400,
       });
@@ -69,4 +65,4 @@ http.route({
   }),
 });
 
-export default http;
+export default http

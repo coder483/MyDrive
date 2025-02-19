@@ -21,14 +21,26 @@ function UserCell({ userId }: { userId: Id<"users"> }) {
       {userProfile?.name}
     </div>
   );
-}
+};
 
 export const columns: ColumnDef<
-  Doc<"files"> & { url: string; isFavorited: boolean }
+  Doc<"files"> & { url: string | null; isFavorited: boolean }
 >[] = [
   {
     accessorKey: "name",
     header: "Name",
+  },
+  {
+    accessorKey: "_creationTime",
+    header: "Created At",
+  },
+  {
+    accessorKey: "isFavorited",
+    header: "Favorited",
+  },
+  {
+    accessorKey: "url",
+    header: "URL",
   },
   {
     accessorKey: "type",

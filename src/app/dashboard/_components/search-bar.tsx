@@ -4,7 +4,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -37,19 +36,19 @@ export function SearchBar({
   }
 
   return (
-    <div>
+    <div className="w-full">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex gap-2 items-center"
+          className="flex flex-col md:flex-row gap-2 items-center w-full"
         >
           <FormField
             control={form.control}
             name="query"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full md:w-auto flex-grow">
                 <FormControl>
-                  <Input {...field} placeholder="your file names" />
+                  <Input {...field} placeholder="your file names" className="w-full" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -60,7 +59,7 @@ export function SearchBar({
             size="sm"
             type="submit"
             disabled={form.formState.isSubmitting}
-            className="flex gap-1"
+            className="flex gap-1 w-full md:w-auto"
           >
             {form.formState.isSubmitting && (
               <Loader2 className="h-4 w-4 animate-spin" />

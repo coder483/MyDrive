@@ -27,6 +27,7 @@ export async function hasAccessToOrg(
   const identity = await ctx.auth.getUserIdentity();
 
   if (!identity) {
+    console.log("No identity found");
     return null;
   }
 
@@ -38,6 +39,7 @@ export async function hasAccessToOrg(
     .first();
 
   if (!user) {
+    console.log("No user found with tokenIdentifier:", identity.tokenIdentifier);
     return null;
   }
 
@@ -46,6 +48,7 @@ export async function hasAccessToOrg(
     user.tokenIdentifier.includes(orgId);
 
   if (!hasAccess) {
+    console.log("User does not have access to orgId:", orgId);
     return null;
   }
 

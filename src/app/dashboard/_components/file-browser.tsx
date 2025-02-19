@@ -83,18 +83,19 @@ export function FileBrowser({
     })) ?? [];
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold">{title}</h1>
+    <div className="p-4 md:p-8">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-0">{title}</h1>
 
-        <SearchBar query={query} setQuery={setQuery} />
-
-        <UploadButton />
+        <div className="flex flex-col md:flex-row gap-4 items-center">
+          <SearchBar query={query} setQuery={setQuery} />
+          <UploadButton />
+        </div>
       </div>
 
       <Tabs defaultValue="grid">
-        <div className="flex justify-between items-center">
-          <TabsList className="mb-2">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+          <TabsList className="mb-2 md:mb-0">
             <TabsTrigger value="grid" className="flex gap-2 items-center">
               <GridIcon />
               Grid
@@ -112,7 +113,7 @@ export function FileBrowser({
                 setType(newType as any);
               }}
             >
-              <SelectTrigger id="type-select" className="w-[180px]">
+              <SelectTrigger id="type-select" className="w-[120px] md:w-[180px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -127,13 +128,13 @@ export function FileBrowser({
 
         {isLoading && (
           <div className="flex flex-col gap-8 w-full items-center mt-24">
-            <Loader2 className="h-32 w-32 animate-spin text-gray-500" />
-            <div className="text-2xl">Loading your files...</div>
+            <Loader2 className="h-16 w-16 md:h-32 md:w-32 animate-spin text-gray-500" />
+            <div className="text-xl md:text-2xl">Loading your files...</div>
           </div>
         )}
 
         <TabsContent value="grid">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {modifiedFiles?.map((file) => {
               return <FileCard key={file._id} file={file} />;
             })}

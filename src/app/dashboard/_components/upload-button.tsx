@@ -161,7 +161,7 @@ export function UploadButton() {
               <Button
                 type="submit"
                 disabled={form.formState.isSubmitting}
-                className="flex gap-1"
+                className="flex gap-1 w-full md:w-auto"
               >
                 {form.formState.isSubmitting && (
                   <Loader2 className="h-4 w-4 animate-spin" />
